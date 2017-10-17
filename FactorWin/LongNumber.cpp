@@ -4,6 +4,13 @@
 #include "cmath"
 #include "string"
 #include "vector"
+
+// for GPU
+#include "cuda.h"
+#include "cuda_runtime.h"
+#include "device_launch_parameters.h"
+__global__ void MultiplyVectorKernel(const int * ArgA, const int * ArgB, int * Result); 
+
 using namespace std;
 
 LongNumber::LongNumber()
@@ -659,6 +666,77 @@ int LongNumberCompare(LongNumber ArgA, LongNumber ArgB)
 	// All of the numbers matched so must be the same
 	// cout << "End of function so matched" << endl;
 	return 0;
+
+}
+
+
+// Parallel GPU functions
+
+__global__ void MultiplyVectorKernel(const int * ArgA, const int * ArgB, int * Result)
+{
+	int i = threadIdx.x;
+	Result[i] = ArgA[i] * ArgB[i];
+
+}
+
+
+LongNumber LongNumberCUDAMultiply(LongNumber ArgA, LongNumber ArgB)
+{
+
+	// get length of input variables
+	int LenA = ArgA.GetLongNumberLength(); 
+	int LenB = ArgB.GetLongNumberLength();
+	int LenR = LenA + LenB + 1;
+
+	// Extract int array from Long Numbers to be passed to device
+	int * ArgAHost; 
+	int * ArgBHost;
+	for (int iCount = 0; iCount < LenA; iCount++)
+	{
+		ArgAHost[iCount] = ArgA.GetValue(iCount); 
+	}
+	for (int iCount = 0; iCount < LenA; iCount++)
+	{
+		ArgBHost[iCount] = ArgB.GetValue(iCount);
+	}
+	int * ReturnHost; 
+
+	// set up device variables
+	int * device_ArgA = 0; 
+	int * device_ArgB = 0;
+	int * device_Result = 0;
+	cudaError_t cudaStatus;
+
+	// set device (only one on this PC)
+	cudaStatus = cudaSetDevice(0);
+
+	// allocate space for args and result
+	cudaStatus = cudaMalloc((void**)&device_ArgA, LenA * sizeof(int));
+	cudaStatus = cudaMalloc((void**)&device_ArgB, LenB * sizeof(int));
+	cudaStatus = cudaMalloc((void**)&device_Result, LenR * sizeof(int));
+
+	// copy the variables to the device
+	cudaStatus = cudaMemcpy(device_ArgA, ArgAHost, LenA * sizeof(int), cudaMemcpyHostToDevice);
+	cudaStatus = cudaMemcpy(device_ArgB, ArgBHost, LenA * sizeof(int), cudaMemcpyHostToDevice);
+
+	// Perform the multiplication 
+	MultiplyVectorKernel<<<1, 100 >>> (device_ArgA, device_ArgB, device_Result);
+
+	// wait for device to finish 
+	cudaStatus = cudaDeviceSynchronize();
+
+	// Copy output vector from GPU buffer to host memory.
+	cudaStatus = cudaMemcpy(ReturnHost, device_Result, LenR * sizeof(int), cudaMemcpyDeviceToHost);
+
+	// now build a long number to hold the result before returning 
+	int ResultLen = sizeof(ReturnHost) / sizeof(int);
+	LongNumber Result(ResultLen);
+	for (int iCount = 0; iCount < ResultLen; iCount++)
+	{
+		Result.SetLongNumber(ReturnHost[iCount], iCount);
+	}
+
+	return Result; 
 
 }
 

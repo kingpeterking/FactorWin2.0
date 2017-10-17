@@ -39,6 +39,9 @@ public:
 	friend LongNumber Concatenate(LongNumber ArgA, LongNumber ArgB);			// Concatenate two Long Numbers
 	friend LongNumber ConcatenateIntLN(int A, LongNumber ArgB);
 	friend LongNumber Pad(LongNumber ArgA, int PadLen);							// Adds left hand zeros to a Long Number
+
+	// Parallel GPU function
+	LongNumber LongNumberCUDAMultiply(LongNumber ArgA, LongNumber ArgB);
 	
 
 private:
