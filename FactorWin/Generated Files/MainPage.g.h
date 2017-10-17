@@ -46,6 +46,10 @@ namespace FactorWin
         private: ::Windows::UI::Xaml::Controls::TextBox^ IterCountText;
         private: ::Windows::UI::Xaml::Controls::TextBox^ ThreadCountText;
         private: ::Windows::UI::Xaml::Controls::ProgressBar^ ThreadCountBar;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ MaxThreads;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ ThreadRatio;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ QueueBatchSize;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ CalcTime;
     };
 }
 

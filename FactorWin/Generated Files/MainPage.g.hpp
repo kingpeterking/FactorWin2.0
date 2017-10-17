@@ -125,6 +125,27 @@ void ::FactorWin::MainPage::Connect(int __connectionId, ::Platform::Object^ __ta
                 this->ThreadCountBar = safe_cast<::Windows::UI::Xaml::Controls::ProgressBar^>(__target);
             }
             break;
+        case 17:
+            {
+                this->MaxThreads = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->MaxThreads))->TextChanged += ref new ::Windows::UI::Xaml::Controls::TextChangedEventHandler(this, (void (::FactorWin::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::TextChangedEventArgs^))&MainPage::MaxThreads_TextChanged);
+            }
+            break;
+        case 18:
+            {
+                this->ThreadRatio = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->ThreadRatio))->TextChanged += ref new ::Windows::UI::Xaml::Controls::TextChangedEventHandler(this, (void (::FactorWin::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::TextChangedEventArgs^))&MainPage::ThreadRatio_TextChanged);
+            }
+            break;
+        case 19:
+            {
+                this->QueueBatchSize = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+                (safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(this->QueueBatchSize))->TextChanged += ref new ::Windows::UI::Xaml::Controls::TextChangedEventHandler(this, (void (::FactorWin::MainPage::*)
+                    (::Platform::Object^, ::Windows::UI::Xaml::Controls::TextChangedEventArgs^))&MainPage::QueueBatchSize_TextChanged);
+            }
+            break;
     }
     _contentLoaded = true;
 }

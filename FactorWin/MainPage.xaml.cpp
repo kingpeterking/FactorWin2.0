@@ -48,8 +48,12 @@ LongNumber LNTargetB;
 int ResultLen;
 int ResultLenB;
 
+// Set up the threading variables
 int IterCount;
 int ThreadCount; 
+int MaxThread = 8;
+int ThreadQueueRatio = 1000; 
+int QueueBatchSizeValue = 100;
 
 // Create the queues 
 FactorQueue FNQueue;
@@ -85,6 +89,10 @@ MainPage::MainPage()
 void FactorWin::MainPage::FactorButton_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	
+	// Start the timer
+	typedef std::chrono::high_resolution_clock Clock;
+	auto StartTime = Clock::now();
+
 	// Create the head of the Queue 
 	FactorNode FNHeadofQueue(0, Zero, Zero, false);
 	FNQueue.Push(FNHeadofQueue);
@@ -127,6 +135,10 @@ void FactorWin::MainPage::FactorButton_Click(Platform::Object^ sender, Windows::
 	}
 	);
 	
+	// Stop the timer
+	auto EndTime = Clock::now();
+	auto ElapsedTime = EndTime - StartTime; 
+	FactorWin::MainPage::CalcTime.Text = ElapsedTime; 
 
 }
 
@@ -136,7 +148,7 @@ void CreateChidNodesQueue()
 {
 	if (FNQueue.ReturnQueueSize() != 0)
 	{
-		for (int iQueueCount = 0; iQueueCount < 1000; iQueueCount++)
+		for (int iQueueCount = 0; iQueueCount < QueueBatchSizeValue; iQueueCount++)
 		{
 			if (FNQueue.ReturnQueueSize() == 0) {break; } // stop if queue is empty
 			
@@ -270,8 +282,8 @@ Windows::Foundation::IAsyncActionWithProgress<int>^ FactorWin::MainPage::CreateC
 				QueueSize = FNQueue.ReturnQueueSize();
 				//ReturnReporter.QueueCount = QueueSize;
 				reporter.report(QueueSize);
-				ThreadCount = int(QueueSize / 1000) + 1;
-				if (ThreadCount >= 8) { ThreadCount = 8; }
+				ThreadCount = int(QueueSize / ThreadQueueRatio) + 1;
+				if (ThreadCount >= MaxThread) { ThreadCount = MaxThread; }
 
 				vector<thread> threads;
 
@@ -575,4 +587,41 @@ void FactorWin::MainPage::Button_Click_6(Platform::Object^ sender, Windows::UI::
 
 }
 
+
+
+
+
+void FactorWin::MainPage::MaxThreads_TextChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::TextChangedEventArgs^ e)
+{
+	Platform::String^ MT = FactorWin::MainPage::MaxThreads->Text;
+	std::wstring MTW(MT->Begin());
+	std::string MTA(MTW.begin(), MTW.end());
+	const char* MTS = MTA.c_str();
+	 
+	MaxThread = atoi(MTS);
+
+}
+
+
+void FactorWin::MainPage::ThreadRatio_TextChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::TextChangedEventArgs^ e)
+{
+	Platform::String^ MT = FactorWin::MainPage::ThreadRatio->Text;
+	std::wstring MTW(MT->Begin());
+	std::string MTA(MTW.begin(), MTW.end());
+	const char* MTS = MTA.c_str();
+
+	ThreadQueueRatio = atoi(MTS);
+
+}
+
+
+void FactorWin::MainPage::QueueBatchSize_TextChanged(Platform::Object^ sender, Windows::UI::Xaml::Controls::TextChangedEventArgs^ e)
+{
+	Platform::String^ MT = FactorWin::MainPage::QueueBatchSize->Text;
+	std::wstring MTW(MT->Begin());
+	std::string MTA(MTW.begin(), MTW.end());
+	const char* MTS = MTA.c_str();
+
+	QueueBatchSizeValue = atoi(MTS);
+}
 

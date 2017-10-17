@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Width="1000">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,0,0" HorizontalAlignment="Left" Width="1000">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,-304,0" HorizontalAlignment="Left" Width="1304">
         <TextBox x:Name="NoAInput" HorizontalAlignment="Left" Margin="53,65,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="475" TextAlignment="Right" TextChanged="NoAInput_TextChanged"/>
         <TextBox x:Name="NoBInput" HorizontalAlignment="Left" Margin="53,119,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="475" TextAlignment="Right" TextChanged="NoBInput_TextChanged"/>
         <Button x:Name="FactorButton" Content="Factor" HorizontalAlignment="Left" Margin="559,65,0,0" VerticalAlignment="Top" Click="FactorButton_Click" Width="103"/>
@@ -22,17 +22,33 @@
             <Run Text=" Info"/>
         </TextBlock>
         <ProgressBar x:Name="QueueProgress" HorizontalAlignment="Left" Height="10" Margin="696,365,0,0" VerticalAlignment="Top" Width="251"/>
-        <TextBox x:Name="QueueText" HorizontalAlignment="Left" Margin="696,333,0,0" TextWrapping="Wrap" Text="Messages" VerticalAlignment="Top" Height="30" Width="251" TextAlignment="Right"/>
+        <TextBox x:Name="QueueText" HorizontalAlignment="Left" Margin="696,333,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="30" Width="251" TextAlignment="Right" IsReadOnly="True" PlaceholderText=""/>
         <Button x:Name="AddButton" Content="Add" HorizontalAlignment="Left" Margin="53,157,0,0" VerticalAlignment="Top" Click="Button_Click_1" Width="75"/>
         <Button Content="Multiply" HorizontalAlignment="Left" Margin="148,157,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
         <Button Content="Divide" HorizontalAlignment="Left" Margin="242,157,0,0" VerticalAlignment="Top" Click="Button_Click" Width="75"/>
         <Button Content="Subtract" HorizontalAlignment="Left" Margin="341,157,0,0" VerticalAlignment="Top" Click="Button_Click_3"/>
         <Button Content="GCD" HorizontalAlignment="Left" Margin="439,157,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click_4"/>
         <Button Content="Fibonacci" HorizontalAlignment="Left" Margin="559,117,0,0" VerticalAlignment="Top" Width="103" Click="Button_Click_5"/>
-        <TextBox x:Name="IterCountText" HorizontalAlignment="Left" Margin="696,416,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="251" TextAlignment="Right"/>
+        <TextBox x:Name="IterCountText" HorizontalAlignment="Left" Margin="696,416,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" IsReadOnly="True"/>
         <TextBlock HorizontalAlignment="Left" Margin="696,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Iterations"/>
         <TextBlock HorizontalAlignment="Left" Margin="696,472,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Threads"/>
-        <TextBox x:Name="ThreadCountText" HorizontalAlignment="Left" Margin="696,499,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="251" TextAlignment="Right"/>
+        <TextBox x:Name="ThreadCountText" HorizontalAlignment="Left" Margin="696,499,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" IsReadOnly="True"/>
         <ProgressBar x:Name="ThreadCountBar" HorizontalAlignment="Left" Height="10" Margin="696,531,0,0" VerticalAlignment="Top" Width="251"/>
+        <TextBox x:Name="MaxThreads" HorizontalAlignment="Left" Margin="988,333,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="8" TextChanged="MaxThreads_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="988,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Run Text="Maxim"/>
+            <Run Text="um"/>
+            <Run Text=" "/>
+            <Run Text="Threads"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="988,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Run Text="Thread"/>
+            <Run Text=" Ratio"/>
+        </TextBlock>
+        <TextBox x:Name="ThreadRatio" HorizontalAlignment="Left" Margin="988,416,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="1000" TextChanged="ThreadRatio_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="988,472,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Queue Batch Size"/>
+        <TextBox x:Name="QueueBatchSize" HorizontalAlignment="Left" Margin="988,499,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="100" TextChanged="QueueBatchSize_TextChanged"/>
+        <TextBox x:Name="CalcTime" HorizontalAlignment="Left" Margin="988,149,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="8"/>
+        <TextBlock HorizontalAlignment="Left" Margin="988,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Calc Time"/>
     </Grid>
 </Page>
