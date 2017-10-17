@@ -50,6 +50,8 @@ namespace FactorWin
         private: ::Windows::UI::Xaml::Controls::TextBox^ ThreadRatio;
         private: ::Windows::UI::Xaml::Controls::TextBox^ QueueBatchSize;
         private: ::Windows::UI::Xaml::Controls::TextBox^ CalcTime;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ CalcTimePerLog;
+        private: ::Windows::UI::Xaml::Controls::TextBox^ IterationsPerLog;
     };
 }
 

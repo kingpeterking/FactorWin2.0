@@ -54,6 +54,8 @@ int ThreadCount;
 int MaxThread = 8;
 int ThreadQueueRatio = 1000; 
 int QueueBatchSizeValue = 100;
+typedef std::chrono::high_resolution_clock Clock;
+auto StartTime = Clock::now();
 
 // Create the queues 
 FactorQueue FNQueue;
@@ -90,8 +92,7 @@ void FactorWin::MainPage::FactorButton_Click(Platform::Object^ sender, Windows::
 {
 	
 	// Start the timer
-	typedef std::chrono::high_resolution_clock Clock;
-	auto StartTime = Clock::now();
+	StartTime = Clock::now();
 
 	// Create the head of the Queue 
 	FactorNode FNHeadofQueue(0, Zero, Zero, false);
@@ -118,6 +119,8 @@ void FactorWin::MainPage::FactorButton_Click(Platform::Object^ sender, Windows::
 		FactorWin::MainPage::IterCountText->Text = IterCount.ToString(); 
 		FactorWin::MainPage::ThreadCountText->Text = ThreadCount.ToString();
 		FactorWin::MainPage::ThreadCountBar->Value = ThreadCount; 
+		float ItersPerLog = IterCount / LNTargetA.GetLongNumberLength(); 
+		FactorWin::MainPage::IterationsPerLog->Text = ItersPerLog.ToString();
 
 		// Update results as they become available
 		while (SolvedQueue.ReturnQueueSize() > 0)
@@ -132,13 +135,17 @@ void FactorWin::MainPage::FactorButton_Click(Platform::Object^ sender, Windows::
 
 		}
 
+		// Stop the timer
+		auto EndTime = Clock::now();
+		std::chrono::duration<double> ElapsedTime = EndTime - StartTime;
+		FactorWin::MainPage::CalcTime->Text = ElapsedTime.count().ToString();
+		float CalcPerLog = round((ElapsedTime.count() / LNTargetA.GetLongNumberLength()) * 100) / 100; 
+		FactorWin::MainPage::CalcTimePerLog->Text = CalcPerLog.ToString(); 
+
 	}
 	);
 	
-	// Stop the timer
-	auto EndTime = Clock::now();
-	auto ElapsedTime = EndTime - StartTime; 
-	FactorWin::MainPage::CalcTime.Text = ElapsedTime; 
+
 
 }
 
@@ -339,6 +346,9 @@ void FactorWin::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI::
 {
 	// Add Button 
 
+	// Start the timer
+	StartTime = Clock::now();
+
 	// Clear out anything that was there before
 	FactorWin::MainPage::ResultsList->Items->Clear();
 
@@ -348,6 +358,11 @@ void FactorWin::MainPage::Button_Click_1(Platform::Object^ sender, Windows::UI::
 	FactorWin::MainPage::ResultsList->Items->Append(Display);
 	Messages->Text = Display; 
 
+	// Stop the timer
+	auto EndTime = Clock::now();
+	std::chrono::duration<double> ElapsedTime = EndTime - StartTime;
+	FactorWin::MainPage::CalcTime->Text = ElapsedTime.count().ToString();
+
 }
 
 
@@ -355,6 +370,9 @@ void FactorWin::MainPage::Button_Click_2(Platform::Object^ sender, Windows::UI::
 {
 
 	// Multiply Button 
+
+	// Start the timer
+	StartTime = Clock::now();
 
 	// Clear out anything that was there before
 	FactorWin::MainPage::ResultsList->Items->Clear();
@@ -365,6 +383,10 @@ void FactorWin::MainPage::Button_Click_2(Platform::Object^ sender, Windows::UI::
 	FactorWin::MainPage::ResultsList->Items->Append(Display);
 	Messages->Text = Display;
 
+	// Stop the timer
+	auto EndTime = Clock::now();
+	std::chrono::duration<double> ElapsedTime = EndTime - StartTime;
+	FactorWin::MainPage::CalcTime->Text = ElapsedTime.count().ToString();
 }
 
 
@@ -372,6 +394,9 @@ void FactorWin::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xa
 {
 
 	// Divide Button 
+
+	// Start the timer
+	StartTime = Clock::now();
 
 	// Clear out anything that was there before
 	FactorWin::MainPage::ResultsList->Items->Clear();
@@ -385,6 +410,10 @@ void FactorWin::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xa
 	FactorWin::MainPage::ResultsList->Items->Append(DisplayR);
 	Messages->Text = DisplayQ + " " + DisplayR;
 
+	// Stop the timer
+	auto EndTime = Clock::now();
+	std::chrono::duration<double> ElapsedTime = EndTime - StartTime;
+	FactorWin::MainPage::CalcTime->Text = ElapsedTime.count().ToString();
 
 }
 
@@ -392,6 +421,9 @@ void FactorWin::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xa
 void FactorWin::MainPage::Button_Click_3(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	// Subtract button 
+
+	// Start the timer
+	StartTime = Clock::now();
 
 	// Clear out anything that was there before
 	FactorWin::MainPage::ResultsList->Items->Clear();
@@ -402,12 +434,20 @@ void FactorWin::MainPage::Button_Click_3(Platform::Object^ sender, Windows::UI::
 	FactorWin::MainPage::ResultsList->Items->Append(Display);
 	Messages->Text = Display;
 
+	// Stop the timer
+	auto EndTime = Clock::now();
+	std::chrono::duration<double> ElapsedTime = EndTime - StartTime;
+	FactorWin::MainPage::CalcTime->Text = ElapsedTime.count().ToString();
+
 }
 
 
 void FactorWin::MainPage::Button_Click_4(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {
 	// GCD Button
+
+	// Start the timer
+	StartTime = Clock::now();
 
 	// Clear out anything that was there before
 	FactorWin::MainPage::ResultsList->Items->Clear();
@@ -433,6 +473,12 @@ void FactorWin::MainPage::Button_Click_4(Platform::Object^ sender, Windows::UI::
 	FactorWin::MainPage::ResultsList->Items->Append(Display);
 	Messages->Text = Display;
 
+	// Stop the timer
+	auto EndTime = Clock::now();
+	std::chrono::duration<double> ElapsedTime = EndTime - StartTime;
+	FactorWin::MainPage::CalcTime->Text = ElapsedTime.count().ToString();
+
+
 }
 
 
@@ -440,6 +486,9 @@ void FactorWin::MainPage::Button_Click_5(Platform::Object^ sender, Windows::UI::
 {
 
 	// Calculates the nth Fibonacci number - n = LNTargetA
+
+	// Start the timer
+	StartTime = Clock::now();
 
 	// Clear out anything that was there before
 	FactorWin::MainPage::ResultsList->Items->Clear();
@@ -488,104 +537,110 @@ void FactorWin::MainPage::Button_Click_5(Platform::Object^ sender, Windows::UI::
 	FactorWin::MainPage::ResultsList->Items->Append(Display);
 	Messages->Text = Display;
 
-}
-
-
-void FactorWin::MainPage::Button_Click_6(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-	// Prime factor button 
-
-	// calculate the prime factors of A
-
-	// Go through the solved queue
-	// ignore the unit x A solutions 
-	// take the next entry 
-
-
-	// Create the head of the Queue 
-	FactorNode FNHeadofQueue(0, Zero, Zero, false);
-	FNQueue.Push(FNHeadofQueue);
-
-	// Clear out anything that was there before
-	FactorWin::MainPage::ResultsList->Items->Clear();
-
-	// Set up the progress bar
-	FactorWin::MainPage::QueueProgress->Maximum = LNTargetA.GetLongNumberLength() * 2000;
-
-	Windows::Foundation::IAsyncActionWithProgress<int>^ ScanandDisp = FactorWin::MainPage::CreateChidNodesQueueAS();
-	ScanandDisp->Progress =
-		ref new Windows::Foundation::AsyncActionProgressHandler<int>
-		([this](Windows::Foundation::IAsyncActionWithProgress<int>^, int progress)
-		{
-
-			// Update Queue info
-			FactorWin::MainPage::QueueText->Text = progress.ToString();
-			FactorWin::MainPage::QueueProgress->Value = progress;
-
-			// Update results as they become available
-			while (SolvedQueue.ReturnQueueSize() > 0)
-			{
-				FactorNode FNItem = SolvedQueue.Pop();
-				LongNumber AValuePassed = TrimLongNumber(FNItem.LNGetAValue());
-				LongNumber BValuePassed = TrimLongNumber(FNItem.LNGetBValue());
-				if ((LongNumberCompare(AValuePassed, LNTargetA) == 0) && (LongNumberCompare(BValuePassed, One) == 0))
-				{
-					// Ignore A = LNTarget and B = 1 
-				} 
-				else if ((LongNumberCompare(BValuePassed, LNTargetA) == 0) && (LongNumberCompare(AValuePassed, One) == 0))
-				{
-					// Ignore B = LNTargte and A = 1 
-				}
-				else
-				{
-					// Next prime factor
-					FactorNode PrimeAdd;
-					PrimeAdd.SetAValue(AValuePassed);
-					PrimeAdd.SetBValue(BValuePassed);
-					if ((LongNumberCompare(AValuePassed, One) == 0) || (LongNumberCompare(BValuePassed, One) == 0))
-					{
-						PrimeAdd.SetFactorComplete(true);			// set to true if either A or B are 1 here having passed first check 
-					}
-					else
-					{
-						PrimeAdd.SetFactorComplete(false);			// set to false if neither A or B are 1 here having passed first check 
-					}
-					PrimeQueue.Push(PrimeAdd);
-
-
-				}
-
-				
-			}
-
-		}
-	); 
-
-
-	// Get all of the entries in the PrimeQueue
-	while (PrimeQueue.ReturnQueueSize() > 0)
-	{
-		FactorNode PrimeAdd = PrimeQueue.Pop();
-		Platform::String ^ FactorComplete; 
-
-		if (PrimeAdd.GetFactorComplete())
-		{
-			FactorComplete = "T";
-		}
-		else
-		{
-			FactorComplete = "F";
-		}
-		Platform::String ^ AValueStr = LongNumberChar(PrimeAdd.LNGetAValue());
-		Platform::String ^ BValueStr = LongNumberChar(PrimeAdd.LNGetBValue());
-		Platform::String ^ Display = "A : " + AValueStr + " B : " + BValueStr + " Factor Complete : " + FactorComplete;
-		FactorWin::MainPage::ResultsList->Items->Append(Display);
-
-	}
-
+	// Stop the timer
+	auto EndTime = Clock::now();
+	std::chrono::duration<double> ElapsedTime = EndTime - StartTime;
+	FactorWin::MainPage::CalcTime->Text = ElapsedTime.count().ToString();
 
 
 }
+
+//
+//void FactorWin::MainPage::Button_Click_6(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+//{
+//	// Prime factor button 
+//
+//	// calculate the prime factors of A
+//
+//	// Go through the solved queue
+//	// ignore the unit x A solutions 
+//	// take the next entry 
+//
+//
+//	// Create the head of the Queue 
+//	FactorNode FNHeadofQueue(0, Zero, Zero, false);
+//	FNQueue.Push(FNHeadofQueue);
+//
+//	// Clear out anything that was there before
+//	FactorWin::MainPage::ResultsList->Items->Clear();
+//
+//	// Set up the progress bar
+//	FactorWin::MainPage::QueueProgress->Maximum = LNTargetA.GetLongNumberLength() * 2000;
+//
+//	Windows::Foundation::IAsyncActionWithProgress<int>^ ScanandDisp = FactorWin::MainPage::CreateChidNodesQueueAS();
+//	ScanandDisp->Progress =
+//		ref new Windows::Foundation::AsyncActionProgressHandler<int>
+//		([this](Windows::Foundation::IAsyncActionWithProgress<int>^, int progress)
+//		{
+//
+//			// Update Queue info
+//			FactorWin::MainPage::QueueText->Text = progress.ToString();
+//			FactorWin::MainPage::QueueProgress->Value = progress;
+//
+//			// Update results as they become available
+//			while (SolvedQueue.ReturnQueueSize() > 0)
+//			{
+//				FactorNode FNItem = SolvedQueue.Pop();
+//				LongNumber AValuePassed = TrimLongNumber(FNItem.LNGetAValue());
+//				LongNumber BValuePassed = TrimLongNumber(FNItem.LNGetBValue());
+//				if ((LongNumberCompare(AValuePassed, LNTargetA) == 0) && (LongNumberCompare(BValuePassed, One) == 0))
+//				{
+//					// Ignore A = LNTarget and B = 1 
+//				} 
+//				else if ((LongNumberCompare(BValuePassed, LNTargetA) == 0) && (LongNumberCompare(AValuePassed, One) == 0))
+//				{
+//					// Ignore B = LNTargte and A = 1 
+//				}
+//				else
+//				{
+//					// Next prime factor
+//					FactorNode PrimeAdd;
+//					PrimeAdd.SetAValue(AValuePassed);
+//					PrimeAdd.SetBValue(BValuePassed);
+//					if ((LongNumberCompare(AValuePassed, One) == 0) || (LongNumberCompare(BValuePassed, One) == 0))
+//					{
+//						PrimeAdd.SetFactorComplete(true);			// set to true if either A or B are 1 here having passed first check 
+//					}
+//					else
+//					{
+//						PrimeAdd.SetFactorComplete(false);			// set to false if neither A or B are 1 here having passed first check 
+//					}
+//					PrimeQueue.Push(PrimeAdd);
+//
+//
+//				}
+//
+//				
+//			}
+//
+//		}
+//	); 
+//
+//
+//	// Get all of the entries in the PrimeQueue
+//	while (PrimeQueue.ReturnQueueSize() > 0)
+//	{
+//		FactorNode PrimeAdd = PrimeQueue.Pop();
+//		Platform::String ^ FactorComplete; 
+//
+//		if (PrimeAdd.GetFactorComplete())
+//		{
+//			FactorComplete = "T";
+//		}
+//		else
+//		{
+//			FactorComplete = "F";
+//		}
+//		Platform::String ^ AValueStr = LongNumberChar(PrimeAdd.LNGetAValue());
+//		Platform::String ^ BValueStr = LongNumberChar(PrimeAdd.LNGetBValue());
+//		Platform::String ^ Display = "A : " + AValueStr + " B : " + BValueStr + " Factor Complete : " + FactorComplete;
+//		FactorWin::MainPage::ResultsList->Items->Append(Display);
+//
+//	}
+//
+//
+//
+//}
 
 
 

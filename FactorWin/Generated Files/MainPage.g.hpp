@@ -146,6 +146,21 @@ void ::FactorWin::MainPage::Connect(int __connectionId, ::Platform::Object^ __ta
                     (::Platform::Object^, ::Windows::UI::Xaml::Controls::TextChangedEventArgs^))&MainPage::QueueBatchSize_TextChanged);
             }
             break;
+        case 20:
+            {
+                this->CalcTime = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+            }
+            break;
+        case 21:
+            {
+                this->CalcTimePerLog = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+            }
+            break;
+        case 22:
+            {
+                this->IterationsPerLog = safe_cast<::Windows::UI::Xaml::Controls::TextBox^>(__target);
+            }
+            break;
     }
     _contentLoaded = true;
 }

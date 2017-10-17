@@ -7,17 +7,18 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Width="1000">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,-304,0" HorizontalAlignment="Left" Width="1304">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0,0,-380,0" HorizontalAlignment="Left" Width="1380">
         <TextBox x:Name="NoAInput" HorizontalAlignment="Left" Margin="53,65,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="475" TextAlignment="Right" TextChanged="NoAInput_TextChanged"/>
         <TextBox x:Name="NoBInput" HorizontalAlignment="Left" Margin="53,119,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="475" TextAlignment="Right" TextChanged="NoBInput_TextChanged"/>
         <Button x:Name="FactorButton" Content="Factor" HorizontalAlignment="Left" Margin="559,65,0,0" VerticalAlignment="Top" Click="FactorButton_Click" Width="103"/>
         <TextBox x:Name="Messages" HorizontalAlignment="Left" Margin="696,151,0,0" TextWrapping="Wrap" Text="Messages" VerticalAlignment="Top" Height="122" Width="251" IsReadOnly="True"/>
         <TextBlock HorizontalAlignment="Left" Margin="696,119,0,0" TextWrapping="Wrap" Text="Messages" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="696,49,0,0" TextWrapping="Wrap" Text="Z Calc" VerticalAlignment="Top" FontSize="36"/>
+        <TextBlock HorizontalAlignment="Left" Margin="1143,43,0,0" TextWrapping="Wrap" Text="Z Calc" VerticalAlignment="Top" FontSize="36"/>
         <TextBlock HorizontalAlignment="Left" Margin="22,71,0,0" TextWrapping="Wrap" Text="A:" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="22,123,0,0" TextWrapping="Wrap" Text="B:" VerticalAlignment="Top"/>
         <ListBox x:Name="ResultsList" HorizontalAlignment="Left" Height="436" Margin="53,196,0,0" VerticalAlignment="Top" Width="475" FontSize="9"/>
         <TextBlock HorizontalAlignment="Left" Margin="696,300,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Run Text="Current "/>
             <Run Text="Queue"/>
             <Run Text=" Info"/>
         </TextBlock>
@@ -29,11 +30,17 @@
         <Button Content="Subtract" HorizontalAlignment="Left" Margin="341,157,0,0" VerticalAlignment="Top" Click="Button_Click_3"/>
         <Button Content="GCD" HorizontalAlignment="Left" Margin="439,157,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click_4"/>
         <Button Content="Fibonacci" HorizontalAlignment="Left" Margin="559,117,0,0" VerticalAlignment="Top" Width="103" Click="Button_Click_5"/>
-        <TextBox x:Name="IterCountText" HorizontalAlignment="Left" Margin="696,416,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" IsReadOnly="True"/>
-        <TextBlock HorizontalAlignment="Left" Margin="696,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Iterations"/>
-        <TextBlock HorizontalAlignment="Left" Margin="696,472,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Threads"/>
-        <TextBox x:Name="ThreadCountText" HorizontalAlignment="Left" Margin="696,499,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" IsReadOnly="True"/>
-        <ProgressBar x:Name="ThreadCountBar" HorizontalAlignment="Left" Height="10" Margin="696,531,0,0" VerticalAlignment="Top" Width="251"/>
+        <TextBox x:Name="IterCountText" HorizontalAlignment="Left" Margin="988,228,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" IsReadOnly="True"/>
+        <TextBlock HorizontalAlignment="Left" Margin="988,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Run Text="Total Number of "/>
+            <Run Text="Iterations"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="988,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+            <Run Text="Current Running "/>
+            <Run Text="Threads"/>
+        </TextBlock>
+        <TextBox x:Name="ThreadCountText" HorizontalAlignment="Left" Margin="988,416,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" IsReadOnly="True"/>
+        <ProgressBar x:Name="ThreadCountBar" HorizontalAlignment="Left" Height="10" Margin="988,448,0,0" VerticalAlignment="Top" Width="251"/>
         <TextBox x:Name="MaxThreads" HorizontalAlignment="Left" Margin="988,333,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="8" TextChanged="MaxThreads_TextChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="988,304,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
             <Run Text="Maxim"/>
@@ -41,14 +48,26 @@
             <Run Text=" "/>
             <Run Text="Threads"/>
         </TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="988,384,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
+        <TextBlock HorizontalAlignment="Left" Margin="988,486,0,0" TextWrapping="Wrap" VerticalAlignment="Top">
             <Run Text="Thread"/>
-            <Run Text=" Ratio"/>
+            <Run Text=" "/>
+            <Run Text="Queue "/>
+            <Run Text="Ratio"/>
         </TextBlock>
-        <TextBox x:Name="ThreadRatio" HorizontalAlignment="Left" Margin="988,416,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="1000" TextChanged="ThreadRatio_TextChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="988,472,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Queue Batch Size"/>
-        <TextBox x:Name="QueueBatchSize" HorizontalAlignment="Left" Margin="988,499,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="100" TextChanged="QueueBatchSize_TextChanged"/>
+        <TextBox x:Name="ThreadRatio" HorizontalAlignment="Left" Margin="988,518,0,0" TextWrapping="Wrap" Text="1000" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="1000" TextChanged="ThreadRatio_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="696,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Queue Batch Size"/>
+        <TextBox x:Name="QueueBatchSize" HorizontalAlignment="Left" Margin="696,416,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="100" TextChanged="QueueBatchSize_TextChanged"/>
         <TextBox x:Name="CalcTime" HorizontalAlignment="Left" Margin="988,149,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="251" TextAlignment="Right" PlaceholderText="8"/>
         <TextBlock HorizontalAlignment="Left" Margin="988,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Calc Time"/>
+        <TextBox x:Name="CalcTimePerLog" HorizontalAlignment="Left" Margin="1276,149,-27,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="55" TextAlignment="Right" PlaceholderText="8"/>
+        <TextBox x:Name="IterationsPerLog" HorizontalAlignment="Left" Margin="1276,227,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="55" TextAlignment="Right" PlaceholderText="8"/>
+        <TextBlock HorizontalAlignment="Left" Margin="1229,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="144">
+            <Run Text="Iterations"/>
+            <Run Text="Per Log"/>
+        </TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="1234,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136">
+            <Run Text="Seconds "/>
+            <Run Text="Per Log"/>
+        </TextBlock>
     </Grid>
 </Page>
